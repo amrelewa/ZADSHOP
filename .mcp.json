@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "wordpress": {
+      "type": "http",
+      "url": "https://zadshop.360helm.com/wp-json/easy-mcp-ai/v1/mcp"
+    }
+  }
+}
