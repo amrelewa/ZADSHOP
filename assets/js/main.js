@@ -4,6 +4,31 @@
 (function () {
   "use strict";
 
+  /* ---------- Intro / preloader ---------- */
+  var intro = document.getElementById("intro");
+  if (intro) {
+    var docEl = document.documentElement;
+    docEl.classList.add("intro-lock");
+    var dismissed = false;
+    function dismissIntro() {
+      if (dismissed) return;
+      dismissed = true;
+      intro.classList.add("intro-hide");
+      docEl.classList.remove("intro-lock");
+      window.removeEventListener("keydown", onIntroKey);
+      setTimeout(function () {
+        if (intro.parentNode) intro.parentNode.removeChild(intro);
+      }, 750);
+    }
+    function onIntroKey(e) {
+      if (e.key === "Enter" || e.key === "Escape" || e.key === " ") dismissIntro();
+    }
+    intro.addEventListener("click", dismissIntro);
+    window.addEventListener("keydown", onIntroKey);
+    var introReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setTimeout(dismissIntro, introReduceMotion ? 400 : 2200);
+  }
+
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 

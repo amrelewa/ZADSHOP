@@ -56,12 +56,12 @@
   scene.add(glowLight);
 
   /* ---------- Citrus cluster (procedural, low-poly) ---------- */
-  var fruitGeo = new THREE.IcosahedronGeometry(1, 1);
+  var fruitGeo = new THREE.IcosahedronGeometry(1, 4);
   var fruitMat = new THREE.MeshStandardMaterial({
     color: THEMES.default.fruit,
-    roughness: 0.45,
+    roughness: 0.4,
     metalness: 0.08,
-    flatShading: true
+    flatShading: false
   });
 
   var fruitGroup = new THREE.Group();

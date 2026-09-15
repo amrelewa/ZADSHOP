@@ -44,6 +44,59 @@ a { color: inherit; text-decoration: none; }
 ul { margin: 0; padding: 0; list-style: none; }
 
 /* ============================================================
+   Intro / preloader
+   ============================================================ */
+html.intro-lock { overflow: hidden; }
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-default);
+  transition: opacity .7s var(--ease), visibility .7s var(--ease);
+}
+.intro.intro-hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.intro-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+.intro-logo {
+  width: clamp(120px, 22vw, 170px);
+  opacity: 0;
+  transform: scale(.82);
+  animation: introLogoIn 1s var(--ease) forwards .2s;
+}
+.intro-bar {
+  width: 180px;
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(246,242,231,.14);
+  overflow: hidden;
+}
+.intro-bar span {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--brand-orange);
+  animation: introBar 1.3s var(--ease) forwards .5s;
+}
+@keyframes introLogoIn {
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes introBar {
+  to { width: 100%; }
+}
+
+/* ============================================================
    3D canvas background
    ============================================================ */
 #bg-canvas {
@@ -351,8 +404,7 @@ main { position: relative; z-index: 5; }
 .brand-visual img {
   width: 100%;
   max-width: 460px;
-  border-radius: 18px;
-  box-shadow: 0 40px 80px -30px rgba(0,0,0,.7), 0 0 0 1px rgba(246,242,231,.06);
+  filter: drop-shadow(0 30px 40px rgba(0,0,0,.55));
   will-change: transform;
 }
 
@@ -449,4 +501,5 @@ section[data-theme="mello"]   { background: radial-gradient(circle at 50% 20%, r
   html { scroll-behavior: auto; }
   .reveal { transition: none; opacity: 1; transform: none; }
   .scroll-cue i { animation: none; }
+  .intro-logo, .intro-bar span { animation: none; opacity: 1; transform: none; width: 100%; }
 }
