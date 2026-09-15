@@ -32,6 +32,26 @@
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  /* ---------- Day / night toggle ---------- */
+  var themeToggle = document.getElementById("themeToggle");
+  if (themeToggle) {
+    var htmlEl = document.documentElement;
+    function applyTheme(mode, persist) {
+      if (mode === "day") htmlEl.setAttribute("data-theme", "day");
+      else htmlEl.removeAttribute("data-theme");
+      themeToggle.setAttribute("aria-pressed", mode === "day" ? "true" : "false");
+      themeToggle.setAttribute("aria-label", mode === "day" ? "Switch to night mode" : "Switch to day mode");
+      if (persist) {
+        try { localStorage.setItem("karma-theme", mode); } catch (e) {}
+      }
+      window.dispatchEvent(new CustomEvent("karma:theme", { detail: mode }));
+    }
+    applyTheme(htmlEl.getAttribute("data-theme") === "day" ? "day" : "night", false);
+    themeToggle.addEventListener("click", function () {
+      applyTheme(htmlEl.getAttribute("data-theme") === "day" ? "night" : "day", true);
+    });
+  }
+
   /* ---------- Mobile nav toggle ---------- */
   var navToggle = document.getElementById("navToggle");
   var navLinks = document.getElementById("navLinks");

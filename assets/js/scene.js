@@ -13,7 +13,7 @@
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------- Brand themes, keyed to data-theme on each <section> ---------- */
-  var THEMES = {
+  var THEMES_NIGHT = {
     default: { bg: 0x0d130f, fog: 0x0d130f, fruit: 0xf99c24, leaf: 0x00793f, accent: 0xf99c24, glow: 0xf99c24 },
     agro:    { bg: 0x14150f, fog: 0x14150f, fruit: 0xee9c33, leaf: 0x4a5a3a, accent: 0x8c8a63, glow: 0xf0b45a },
     ricchi:  { bg: 0x1a0c11, fog: 0x1a0c11, fruit: 0xc23b4a, leaf: 0x3a2430, accent: 0xc9a227, glow: 0xe0576a },
@@ -22,6 +22,25 @@
     mello:   { bg: 0x081712, fog: 0x081712, fruit: 0xa8d24a, leaf: 0x0f7a68, accent: 0x0f7a68, glow: 0xbfe86a },
     contact: { bg: 0x0c0d0a, fog: 0x0c0d0a, fruit: 0xf99c24, leaf: 0x00793f, accent: 0xf99c24, glow: 0xf99c24 }
   };
+  var THEMES_DAY = {
+    default: { bg: 0xf7f5ee, fog: 0xf7f5ee, fruit: 0xe07b12, leaf: 0x1f7a44, accent: 0xc96f0e, glow: 0xffb703 },
+    agro:    { bg: 0xf2f0e2, fog: 0xf2f0e2, fruit: 0xd98a1f, leaf: 0x5a6b45, accent: 0x6b6a45, glow: 0xe8b45a },
+    ricchi:  { bg: 0xf8eef1, fog: 0xf8eef1, fruit: 0xa32e3d, leaf: 0x5c2a36, accent: 0x8f1c30, glow: 0xd44f63 },
+    citra:   { bg: 0xfdf3e0, fog: 0xfdf3e0, fruit: 0xe07b12, leaf: 0x6b5a2e, accent: 0xb8600a, glow: 0xffab3d },
+    cleo:    { bg: 0xf5efdf, fog: 0xf5efdf, fruit: 0xb8952f, leaf: 0x585640, accent: 0x8a6c1e, glow: 0xd9b968 },
+    mello:   { bg: 0xeaf5ee, fog: 0xeaf5ee, fruit: 0x6fae2e, leaf: 0x0c6354, accent: 0x0c6354, glow: 0x8fc94e },
+    contact: { bg: 0xf7f5ee, fog: 0xf7f5ee, fruit: 0xe07b12, leaf: 0x1f7a44, accent: 0xc96f0e, glow: 0xffb703 }
+  };
+
+  function currentMode() {
+    return document.documentElement.getAttribute("data-theme") === "day" ? "day" : "night";
+  }
+  var mode = currentMode();
+  var THEMES = mode === "day" ? THEMES_DAY : THEMES_NIGHT;
+  window.addEventListener("karma:theme", function (e) {
+    mode = e.detail === "day" ? "day" : "night";
+  });
+
   /* ---------- Renderer / scene / camera ---------- */
   var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true, powerPreference: "high-performance" });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -187,8 +206,9 @@
     var t = clock.getElapsedTime();
     var dt = clock.getDelta();
 
+    var themeSet = mode === "day" ? THEMES_DAY : THEMES_NIGHT;
     var themeKey = themeKeys[activeIndex] || "default";
-    var theme = THEMES[themeKey] || THEMES.default;
+    var theme = themeSet[themeKey] || themeSet.default;
 
     lerpColorTo(currentTheme.bg, theme.bg, LERP);
     lerpColorTo(currentTheme.fruit, theme.fruit, LERP);
