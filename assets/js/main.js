@@ -50,17 +50,17 @@
   }
 
   var THEME_VARS = {
-    default: "var(--gold)",
+    default: "var(--brand-orange)",
     agro: "var(--agro)",
     ricchi: "var(--ricchi)",
     citra: "var(--citra)",
     cleo: "var(--cleo)",
     mello: "var(--mello)",
-    contact: "var(--gold)"
+    contact: "var(--brand-orange)"
   };
 
   function setActiveTheme(theme) {
-    document.documentElement.style.setProperty("--theme-accent", THEME_VARS[theme] || "var(--gold)");
+    document.documentElement.style.setProperty("--theme-accent", THEME_VARS[theme] || "var(--brand-orange)");
     var dotKey = dotKeyFor(theme);
     dots.forEach(function (d) {
       d.classList.toggle("active", d.getAttribute("data-dot") === dotKey);

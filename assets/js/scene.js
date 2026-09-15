@@ -14,13 +14,13 @@
 
   /* ---------- Brand themes, keyed to data-theme on each <section> ---------- */
   var THEMES = {
-    default: { bg: 0x10130f, fog: 0x10130f, fruit: 0xe8792c, leaf: 0x3a4a2e, accent: 0xc9a227, glow: 0xc9a227 },
+    default: { bg: 0x0d130f, fog: 0x0d130f, fruit: 0xf99c24, leaf: 0x00793f, accent: 0xf99c24, glow: 0xf99c24 },
     agro:    { bg: 0x14150f, fog: 0x14150f, fruit: 0xee9c33, leaf: 0x4a5a3a, accent: 0x8c8a63, glow: 0xf0b45a },
     ricchi:  { bg: 0x1a0c11, fog: 0x1a0c11, fruit: 0xc23b4a, leaf: 0x3a2430, accent: 0xc9a227, glow: 0xe0576a },
     citra:   { bg: 0x18120a, fog: 0x18120a, fruit: 0xf2921d, leaf: 0x3a3020, accent: 0xf2921d, glow: 0xffb040 },
     cleo:    { bg: 0x0d0c08, fog: 0x0d0c08, fruit: 0xd9b23c, leaf: 0x2a2a1c, accent: 0xb8952f, glow: 0xe8c96a },
     mello:   { bg: 0x081712, fog: 0x081712, fruit: 0xa8d24a, leaf: 0x0f7a68, accent: 0x0f7a68, glow: 0xbfe86a },
-    contact: { bg: 0x0c0d0a, fog: 0x0c0d0a, fruit: 0xe8792c, leaf: 0x3a4a2e, accent: 0xc9a227, glow: 0xc9a227 }
+    contact: { bg: 0x0c0d0a, fog: 0x0c0d0a, fruit: 0xf99c24, leaf: 0x00793f, accent: 0xf99c24, glow: 0xf99c24 }
   };
   /* ---------- Renderer / scene / camera ---------- */
   var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true, powerPreference: "high-performance" });
