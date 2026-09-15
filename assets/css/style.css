@@ -26,6 +26,8 @@
 
   --maxw: 1180px;
   --ease: cubic-bezier(.22, 1, .36, 1);
+  --nav-h: 112px;
+  --logo-h: 68px;
 }
 
 * { box-sizing: border-box; }
@@ -125,13 +127,14 @@ html.intro-lock { overflow: hidden; }
 .topnav {
   position: fixed;
   top: 0; left: 0; right: 0;
+  height: var(--nav-h);
   z-index: 40;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 22px clamp(20px, 4vw, 56px);
+  padding: 0 clamp(20px, 4vw, 56px);
   backdrop-filter: blur(10px);
-  background: linear-gradient(to bottom, rgba(10,11,9,.55), transparent);
+  background: linear-gradient(to bottom, rgba(10,11,9,.6), transparent);
 }
 
 .brand-mark {
@@ -139,7 +142,7 @@ html.intro-lock { overflow: hidden; }
   align-items: center;
 }
 .brand-mark img {
-  height: 40px;
+  height: var(--logo-h);
   width: auto;
   display: block;
 }
@@ -148,7 +151,7 @@ html.intro-lock { overflow: hidden; }
   position: fixed;
   top: 0;
   right: clamp(20px, 4vw, 56px);
-  height: 84px;
+  height: var(--nav-h);
   z-index: 40;
   display: flex;
   align-items: center;
@@ -468,6 +471,10 @@ section[data-theme="mello"]   { background: radial-gradient(circle at 50% 20%, r
    Responsive
    ============================================================ */
 @media (max-width: 900px) {
+  :root {
+    --nav-h: 76px;
+    --logo-h: 46px;
+  }
   .nav-links {
     top: 0; right: 0;
     height: 100vh;
