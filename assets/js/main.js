@@ -84,6 +84,22 @@
     revealEls.forEach(function (el) { el.classList.add("in-view"); });
   }
 
+  /* ---------- Crate build animation (fruit fills box, lid closes, carton reveals) ---------- */
+  var crateEls = document.querySelectorAll(".crate");
+  if ("IntersectionObserver" in window) {
+    var crateObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-filling");
+          crateObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    crateEls.forEach(function (el) { crateObserver.observe(el); });
+  } else {
+    crateEls.forEach(function (el) { el.classList.add("is-filling"); });
+  }
+
   /* ---------- Active section -> dot nav + body theme ---------- */
   var sections = document.querySelectorAll("main .section");
   var dots = document.querySelectorAll("#dotNav a");
